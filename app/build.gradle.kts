@@ -8,6 +8,8 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    id("org.barfuin.gradle.taskinfo") version "2.2.0"
+
 }
 
 repositories {
