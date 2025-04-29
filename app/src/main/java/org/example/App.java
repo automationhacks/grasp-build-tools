@@ -3,12 +3,29 @@
  */
 package org.example;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpRequest;
+import com.google.api.client.http.HttpRequestFactory;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import java.io.IOException;
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
-    }
+public class App {
+  public String getGreeting() {
+    return "Hello World!";
+  }
+
+  public String getUrl() {
+    return "https://wiby.me";
+  }
+
+  public static void main(String[] args) throws IOException {
+    App app = new App();
+    System.out.println(app.getGreeting());
+
+    HttpRequestFactory httpRequestFactory = new NetHttpTransport().createRequestFactory();
+    HttpRequest request = httpRequestFactory.buildGetRequest(new GenericUrl(app.getUrl()));
+    String rawResponse = request.execute().parseAsString();
+    System.out.println("\n------------\n");
+    System.out.println(rawResponse);
+  }
 }
